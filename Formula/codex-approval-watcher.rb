@@ -14,7 +14,6 @@ class CodexApprovalWatcher < Formula
 
   service do
     run [opt_bin/"codex-approval-watcher", "run"]
-    environment_variables PATH: std_service_path_env
     keep_alive true
     log_path var/"log/codex-approval-watcher.log"
     error_log_path var/"log/codex-approval-watcher.log"
@@ -22,12 +21,15 @@ class CodexApprovalWatcher < Formula
 
   def caveats
     <<~EOS
-      Create a config file before starting the service:
+      The default config file will be created automatically on first run at:
 
-        mkdir -p ~/.config/codex-approval-watcher
-        cp #{opt_pkgshare}/config.homebrew.toml.example ~/.config/codex-approval-watcher/config.toml
+        ~/.config/codex-approval-watcher/config.toml
 
-      Then edit ~/.config/codex-approval-watcher/config.toml to fit your setup.
+      Edit it after the first run if you want to customize hooks or other settings.
+
+      You can preview the default template with:
+
+        cat #{opt_pkgshare}/config.homebrew.toml.example
     EOS
   end
 
